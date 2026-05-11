@@ -88,27 +88,27 @@ Ceph는 파라미터 설정(Replica 수, PG 수)과 I/O 엔진 선택에 따라 
 ## 3. 아키텍처
 
 ```
-┌─────────────────────────────────────────────────────┐
-│                Xubuntu 22.04 (Bare-metal)            │
-│                  Intel i5-12400 / 64GB               │
-│                   1TB NVMe SSD                       │
-│                                                      │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────┐ │
-│  │controller│  │ ubuntu01 │  │ ubuntu02 │  │ubun..│ │
-│  │          │  │          │  │          │  │  03  │ │
-│  │OpenStack │  │ Compute  │  │ Compute  │  │Comp..│ │
-│  │Controller│  │ Ceph OSD │  │ Ceph OSD │  │Ceph..│ │
-│  │Ceph MON  │  │ /dev/vdb │  │ /dev/vdb │  │/dev..│ │
-│  │  MGR     │  │(Raw Map) │  │(Raw Map) │  │(Raw) │ │
-│  └──────────┘  └────┬─────┘  └────┬─────┘  └──┬───┘ │
-│                     │             │            │     │
-│              ┌──────▼─────────────▼────────────▼──┐  │
-│              │  nvme1n1p3  nvme1n1p4  nvme1n1p5   │  │
-│              │         1TB NVMe SSD               │  │
-│              └───────────────────────────────────┘  │
-│                                                      │
-│  Network: Management(192.168.0.0/24) + Provider      │
-└─────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│                Xubuntu 22.04 (Bare-metal)                │
+│                  Intel i5-12400 / 64GB                   │
+│                   1TB NVMe SSD                           │
+│                                                          │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐  │
+│  │controller│  │ ubuntu01 │  │ ubuntu02 │  │ ubuntu03 │  │
+│  │          │  │          │  │          │  │          │  │
+│  │OpenStack │  │ Compute  │  │ Compute  │  │ Compute  │  │
+│  │Controller│  │ Ceph OSD │  │ Ceph OSD │  │ Ceph OSD │  │
+│  │Ceph MON  │  │ /dev/vdb │  │ /dev/vdb │  │ /dev/vdb │  │
+│  │  MGR     │  │(Raw Map) │  │(Raw Map) │  │(Raw Map) │  │
+│  └──────────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘  │
+│                     │             │             │        │
+│              ┌──────▼─────────────▼─────────────▼──┐     │
+│              │  nvme1n1p3  nvme1n1p4  nvme1n1p5    │     │
+│              │         1TB NVMe SSD                │     │
+│              └─────────────────────────────────────┘     │
+│                                                          │
+│  Network: Management(192.168.0.0/24) + Provider          │
+└──────────────────────────────────────────────────────────┘
 ```
 
 **핵심 아키텍처 결정 사항** → [docs/01_architecture.md](docs/01_architecture.md) 참고
