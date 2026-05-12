@@ -1,0 +1,41 @@
+ubuntu@bench-vm:~$ fio --name=write_amp --ioengine=libaio --iodepth=32 --rw=write --bs=4k --direct=1 --size=1G --numjobs=1 --runtime=60 --time_based --rate=50m --group_reporting
+write_amp: (g=0): rw=write, bs=(R) 4096B-4096B, (W) 4096B-4096B, (T) 4096B-4096B, ioengine=libaio, iodepth=32
+fio-3.28
+Starting 1 process
+Jobs: 1 (f=1), 0B/s-0B/s: [W(1)][100.0%][w=50.0MiB/s][w=12.8k IOPS][eta 00m:00s]
+write_amp: (groupid=0, jobs=1): err= 0: pid=1985: Sat Apr 25 08:59:21 2026
+  write: IOPS=12.8k, BW=50.0MiB/s (52.4MB/s)(3000MiB/60001msec); 0 zone resets
+    slat (nsec): min=1208, max=4956.6k, avg=14201.42, stdev=21512.81
+    clat (nsec): min=906, max=9699.6k, avg=75508.47, stdev=149719.82
+     lat (usec): min=16, max=9715, avg=90.13, stdev=153.25
+    clat percentiles (nsec):
+     |  1.00th=[   1208],  5.00th=[  21632], 10.00th=[  24960],
+     | 20.00th=[  29312], 30.00th=[  33024], 40.00th=[  37632],
+     | 50.00th=[  42240], 60.00th=[  49408], 70.00th=[  59648],
+     | 80.00th=[  80384], 90.00th=[ 134144], 95.00th=[ 222208],
+     | 99.00th=[ 544768], 99.50th=[ 880640], 99.90th=[2375680],
+     | 99.95th=[2605056], 99.99th=[3883008]
+   bw (  KiB/s): min=51160, max=51320, per=100.00%, avg=51238.00, stdev=22.41, samples=119
+   iops        : min=12790, max=12830, avg=12809.50, stdev= 5.61, samples=119
+  lat (nsec)   : 1000=0.18%
+  lat (usec)   : 2=1.72%, 4=0.24%, 10=0.15%, 20=1.79%, 50=56.78%
+  lat (usec)   : 100=24.36%, 250=10.61%, 500=3.00%, 750=0.56%, 1000=0.21%
+  lat (msec)   : 2=0.24%, 4=0.16%, 10=0.01%
+  cpu          : usr=17.21%, sys=36.50%, ctx=590183, majf=0, minf=14
+  IO depths    : 1=71.1%, 2=20.2%, 4=6.3%, 8=1.5%, 16=0.4%, 32=0.4%, >=64=0.0%
+     submit    : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     complete  : 0=0.0%, 4=100.0%, 8=0.0%, 16=0.0%, 32=0.0%, 64=0.0%, >=64=0.0%
+     issued rwts: total=0,768000,0,0 short=0,0,0,0 dropped=0,0,0,0
+     latency   : target=0, window=0, percentile=100.00%, depth=32
+
+Run status group 0 (all jobs):
+  WRITE: bw=50.0MiB/s (52.4MB/s), 50.0MiB/s-50.0MiB/s (52.4MB/s-52.4MB/s), io=3000MiB (3146MB), run=60001-60001msec
+
+Disk stats (read/write):
+  vda: ios=0/766688, merge=0/11, ticks=0/49820, in_queue=49876, util=99.88%
+
+Device           r/s       rMB/s    rrqm/s %rrqm   r_await  rareq-sz w/s     wMB/s     wrqm/s  %wrqm   w_await wareq-sz d/s       dMB/s    drqm/s %drqm   d_await dareq-sz f/s   f_await aqu-sz %util
+nvme0n1          0.00      0.00     0.00   0.00    0.00     0.00 10656.00    257.30    12.50   0.12    0.12    24.73    0.00      0.00     0.00   0.00    0.00     0.00 4635.50    0.19    2.12  37.20
+nvme0n1          0.00      0.00     0.00   0.00    0.00     0.00 10613.00    252.32    13.50   0.13    0.12    24.35    0.00      0.00     0.00   0.00    0.00     0.00 4638.00    0.18    2.09  37.45
+nvme0n1          0.00      0.00     0.00   0.00    0.00     0.00 9966.50    244.15    26.00   0.26    0.11    25.08    0.00      0.00     0.00   0.00    0.00     0.00 4342.50    0.18    1.91  35.85
+nvme0n1          0.00      0.00     0.00   0.00    0.00     0.00 10731.50    300.05    30.50   0.28    0.11    28.63    0.00      0.00     0.00   0.00    0.00     0.00 4412.50    0.18    2.03  37.15
